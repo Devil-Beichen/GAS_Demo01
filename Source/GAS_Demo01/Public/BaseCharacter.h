@@ -4,9 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
-#include "AttributeSet.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
+
+class UBaseAttributeSet;
 
 UCLASS(BlueprintType)
 class GAS_DEMO01_API ABaseCharacter : public ACharacter, public IAbilitySystemInterface
@@ -20,7 +21,7 @@ public:
 	// 获取GAS组件
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	// 获取GAS属性集
-	virtual UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+	virtual UBaseAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,8 +32,8 @@ protected:
 	TObjectPtr<UAbilitySystemComponent> AbilitySystem;
 
 	// GAS属性集
-	UPROPERTY()
-	TObjectPtr<UAttributeSet> AttributeSet;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AbilitySystem")
+	TObjectPtr<UBaseAttributeSet> AttributeSet;
 
 public:
 	// Called every frame
