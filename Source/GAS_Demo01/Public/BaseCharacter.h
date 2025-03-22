@@ -20,8 +20,6 @@ public:
 
 	// 获取GAS组件
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	// 获取GAS属性集
-	virtual UBaseAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 protected:
 	// Called when the game starts or when spawned
@@ -30,10 +28,6 @@ protected:
 	// 技能组件
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AbilitySystem")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystem;
-
-	// GAS属性集
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AbilitySystem")
-	TObjectPtr<UBaseAttributeSet> AttributeSet;
 
 public:
 	// Called every frame

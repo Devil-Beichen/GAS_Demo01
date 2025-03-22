@@ -2,3 +2,26 @@
 
 
 #include "BaseAttributeSet.h"
+
+#include "GameplayEffectExtension.h"
+
+void UBaseAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
+{
+	Super::PostGameplayEffectExecute(Data);
+
+	/**
+	 * 确保属性值在范围内
+	 */
+	if (Data.EvaluatedData.Attribute == GetHPAttribute())
+	{
+		SetHP(FMath::Clamp(GetHP(), 0.0f, GetMaxHP()));
+	}
+	if (Data.EvaluatedData.Attribute == GetMPAttribute())
+	{
+		SetHP(FMath::Clamp(GetMP(), 0.0f, GetMaxMP()));
+	}
+	if (Data.EvaluatedData.Attribute == GetStrengthAttribute())
+	{
+		SetHP(FMath::Clamp(GetStrength(), 0.0f, GetMaxStrength()));
+	}
+}

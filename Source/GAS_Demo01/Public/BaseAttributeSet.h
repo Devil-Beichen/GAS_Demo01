@@ -52,4 +52,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="BaseAttributeSet")
 	FGameplayAttributeData MaxStrength;
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, MaxStrength);
+
+	// 技能值 游戏后效果执行
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 };
