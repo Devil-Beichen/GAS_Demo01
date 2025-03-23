@@ -25,6 +25,12 @@ UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (AbilitySystem)
+	{
+		// 监听属性变化
+		AbilitySystem->GetGameplayAttributeValueChangeDelegate(UBaseAttributeSet::GetHPAttribute()).AddUObject(this, &ABaseCharacter::OnHealthAttributeChanged);
+	}
 }
 
 // Called every frame
@@ -37,4 +43,10 @@ void ABaseCharacter::Tick(float DeltaTime)
 void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+// 属性变化回调
+void ABaseCharacter::OnHealthAttributeChanged(const FOnAttributeChangeData& Data)
+{
+	HPChangeEvent.Broadcast(Data.NewValue);
 }

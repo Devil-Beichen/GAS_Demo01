@@ -8,6 +8,10 @@
 #include "BaseCharacter.generated.h"
 
 class UBaseAttributeSet;
+struct FOnAttributeChangeData;
+
+// 监听血量变化的代理
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangeEvent, float, NewValue);
 
 UCLASS(BlueprintType)
 class GAS_DEMO01_API ABaseCharacter : public ACharacter, public IAbilitySystemInterface
@@ -35,4 +39,11 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	// 监听血量变化代理
+	UPROPERTY(BlueprintAssignable, Category="Ability")
+	FOnHealthChangeEvent HPChangeEvent;
+
+	// 监听血量变化
+	void OnHealthAttributeChanged(const FOnAttributeChangeData& Data);
 };
