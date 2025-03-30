@@ -5,6 +5,7 @@
 
 #include "AbilitySystemComponent.h"
 #include "BaseAttributeSet.h"
+#include "BaseGameplayAbility.h"
 
 
 // Sets default values
@@ -54,4 +55,17 @@ void ABaseCharacter::OnHealthAttributeChanged(const FOnAttributeChangeData& Data
 		// UE_LOG(LogTemp, Warning, TEXT("OnHealthAttributeChanged: OldValue = %f, NewValue = %f"), Data.OldValue, Data.NewValue);
 		HPChangeEvent.Broadcast(Data.NewValue);
 	}
+}
+
+// 获取技能信息
+FGameplayAbilityInfo ABaseCharacter::GameplayAbilitytyInfo(TSubclassOf<UBaseGameplayAbility> AbilityClass, int Level)
+{
+	// 获取技能信息
+	UBaseGameplayAbility* AbilityIncetance = AbilityClass->GetDefaultObject<UBaseGameplayAbility>();
+	if (AbilitySystem && AbilityIncetance)
+	{
+		return AbilityIncetance->GetAbilityInfo(Level);
+	}
+
+	return FGameplayAbilityInfo();
 }

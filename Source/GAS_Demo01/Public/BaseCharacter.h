@@ -7,6 +7,8 @@
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
+class UBaseGameplayAbility;
+struct FGameplayAbilityInfo;
 class UBaseAttributeSet;
 struct FOnAttributeChangeData;
 
@@ -46,4 +48,8 @@ public:
 
 	// 监听血量变化
 	void OnHealthAttributeChanged(const FOnAttributeChangeData& Data);
+
+	// 获取技能信息
+	UFUNCTION(BlueprintCallable, Category="BaseCharacter")
+	FGameplayAbilityInfo GameplayAbilitytyInfo(TSubclassOf<UBaseGameplayAbility> AbilityClass, int Level);
 };
