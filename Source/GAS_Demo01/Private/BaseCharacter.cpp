@@ -31,6 +31,8 @@ void ABaseCharacter::BeginPlay()
 	{
 		// 监听属性变化
 		AbilitySystem->GetGameplayAttributeValueChangeDelegate(UBaseAttributeSet::GetHPAttribute()).AddUObject(this, &ABaseCharacter::OnHealthAttributeChanged);
+		AbilitySystem->GetGameplayAttributeValueChangeDelegate(UBaseAttributeSet::GetMPAttribute()).AddUObject(this, &ABaseCharacter::OnMPAttributeChanged);
+		AbilitySystem->GetGameplayAttributeValueChangeDelegate(UBaseAttributeSet::GetStrengthAttribute()).AddUObject(this, &ABaseCharacter::OnStrengthAttributeChanged);
 	}
 }
 
@@ -46,7 +48,7 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-// 属性变化回调
+// 血量属性变化回调
 void ABaseCharacter::OnHealthAttributeChanged(const FOnAttributeChangeData& Data)
 {
 	// 属性变化回调
@@ -54,6 +56,28 @@ void ABaseCharacter::OnHealthAttributeChanged(const FOnAttributeChangeData& Data
 	{
 		// UE_LOG(LogTemp, Warning, TEXT("OnHealthAttributeChanged: OldValue = %f, NewValue = %f"), Data.OldValue, Data.NewValue);
 		HPChangeEvent.Broadcast(Data.NewValue);
+	}
+}
+
+// 蓝量属性变化回调
+void ABaseCharacter::OnMPAttributeChanged(const FOnAttributeChangeData& Data)
+{
+	// 属性变化回调
+	if (Data.OldValue != Data.NewValue)
+	{
+		// UE_LOG(LogTemp, Warning, TEXT("OnHealthAttributeChanged: OldValue = %f, NewValue = %f"), Data.OldValue, Data.NewValue);
+		MPChangeEvent.Broadcast(Data.NewValue);
+	}
+}
+
+// 能量属性变化回调
+void ABaseCharacter::OnStrengthAttributeChanged(const FOnAttributeChangeData& Data)
+{
+	// 属性变化回调
+	if (Data.OldValue != Data.NewValue)
+	{
+		// UE_LOG(LogTemp, Warning, TEXT("OnHealthAttributeChanged: OldValue = %f, NewValue = %f"), Data.OldValue, Data.NewValue);
+		StrengthChangeEvent.Broadcast(Data.NewValue);
 	}
 }
 

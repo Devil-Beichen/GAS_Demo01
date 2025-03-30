@@ -46,8 +46,20 @@ public:
 	UPROPERTY(BlueprintAssignable, Category="Ability")
 	FOnHealthChangeEvent HPChangeEvent;
 
+	// 监听蓝量变化代理
+	UPROPERTY(BlueprintAssignable, Category="Ability")
+	FOnHealthChangeEvent MPChangeEvent;
+
+	// 监听能量变化代理
+	UPROPERTY(BlueprintAssignable, Category="Ability")
+	FOnHealthChangeEvent StrengthChangeEvent;
+
 	// 监听血量变化
 	void OnHealthAttributeChanged(const FOnAttributeChangeData& Data);
+	// 监听蓝量变化
+	void OnMPAttributeChanged(const FOnAttributeChangeData& Data);
+	// 监听能量变化
+	void OnStrengthAttributeChanged(const FOnAttributeChangeData& Data);
 
 	// 获取技能信息
 	UFUNCTION(BlueprintCallable, Category="BaseCharacter")
