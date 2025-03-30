@@ -48,5 +48,10 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 // 属性变化回调
 void ABaseCharacter::OnHealthAttributeChanged(const FOnAttributeChangeData& Data)
 {
-	HPChangeEvent.Broadcast(Data.NewValue);
+	// 属性变化回调
+	if (Data.OldValue != Data.NewValue)
+	{
+		// UE_LOG(LogTemp, Warning, TEXT("OnHealthAttributeChanged: OldValue = %f, NewValue = %f"), Data.OldValue, Data.NewValue);
+		HPChangeEvent.Broadcast(Data.NewValue);
+	}
 }
