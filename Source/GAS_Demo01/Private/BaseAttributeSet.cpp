@@ -18,10 +18,10 @@ void UBaseAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectMo
 	}
 	if (Data.EvaluatedData.Attribute == GetMPAttribute())
 	{
-		SetHP(FMath::Clamp(GetMP(), 0.0f, GetMaxMP()));
+		SetMP(FMath::Clamp(GetMP(), 0.0f, GetMaxMP()));
 	}
 	if (Data.EvaluatedData.Attribute == GetStrengthAttribute())
 	{
-		SetHP(FMath::Clamp(GetStrength(), 0.0f, GetMaxStrength()));
+		SetStrength(FMath::Clamp(GetStrength(), 0.0f, GetMaxStrength()));
 	}
 }
