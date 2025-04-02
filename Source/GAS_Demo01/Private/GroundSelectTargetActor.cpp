@@ -35,7 +35,6 @@ void AGroundSelectTargetActor::ConfirmTargetingAndContinue()
 	TArray<FOverlapResult> OverlapResults; // 存储重叠检测的结果
 	TArray<TWeakObjectPtr<AActor>> OverlapActors; // 存储重叠的角色
 
-	FHitResult HitResult; // 存储射线检测的结果
 	FCollisionQueryParams QueryParams; // 射线检测的查询参数
 	QueryParams.bTraceComplex = false; // 不启用复杂碰撞检测
 	QueryParams.bReturnPhysicalMaterial = false; // 不返回物理材质信息
